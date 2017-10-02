@@ -1,0 +1,40 @@
+acl clientes {
+  localhost;
+  100.64.0.0/10;
+  192.168.0.0/16;
+  172.16.0.0/12;
+  10.0.0.0/8;
+};
+
+options {
+  directory "/var/cache/bind";
+
+  dnssec-validation auto;
+
+  auth-nxdomain no;    # conform to RFC1035
+  listen-on-v6 { any; };
+  allow-recursion{ clientes; };
+
+  listen-on-v6 { any; };
+  allow-recursion{ clientes; };
+  allow-query-cache{ clientes; };
+};
+
+
+statistics-channels {
+  inet 127.0.0.1 port 8053 allow { 127.0.0.1; };
+};
+
+logging{
+  channel simple_log {
+    syslog syslog_facility;
+    //severity warning;
+    severity info;
+    print-time yes;
+    print-severity yes;
+    print-category yes;
+  };
+  category default{
+    simple_log;
+  };
+};
