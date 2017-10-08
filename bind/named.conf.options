@@ -14,9 +14,6 @@ options {
   auth-nxdomain no;    # conform to RFC1035
   listen-on-v6 { any; };
   allow-recursion{ clientes; };
-
-  listen-on-v6 { any; };
-  allow-recursion{ clientes; };
   allow-query-cache{ clientes; };
 };
 
